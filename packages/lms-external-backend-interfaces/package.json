@@ -10,7 +10,7 @@
   },
   "author": "",
   "dependencies": {
-    "@lmstudio/lms-common": "^0.7.5",
+    "@lmstudio/lms-common": "^0.8.0",
     "@lmstudio/lms-communication": "^0.6.5",
     "@lmstudio/lms-shared-types": "^0.6.3",
     "zod": "^3.22.4"
