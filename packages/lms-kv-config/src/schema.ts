@@ -25,6 +25,7 @@ import { kvValueTypesLibrary } from "./valueTypes.js";
 // ---------------------------
 
 export const globalConfigSchematics = new KVConfigSchematicsBuilder(kvValueTypesLibrary)
+  .extension("ext.virtualModel.customField")
   .field("envVars", "envVars", {}, {})
   .scope("llm.prediction", builder =>
     builder
@@ -236,6 +237,7 @@ export const globalConfigSchematics = new KVConfigSchematicsBuilder(kvValueTypes
         { int: true, min: -1, uncheckedHint: "config:seedUncheckedHint" },
         { checked: false, value: -1 },
       )
+      .field("offloadKVCacheToGpu", "boolean", {}, true)
       .scope("llama", builder =>
         builder
           .scope("acceleration", builder =>
@@ -426,7 +428,7 @@ export const llmSharedLoadConfigSchematics = llmLoadSchematics.sliced(
 const llamaLoadConfigSchematics = globalConfigSchematics.sliced("llama.load.*", "load.*");
 
 export const llmLlamaLoadConfigSchematics = llmSharedLoadConfigSchematics
-  .union(llmLoadSchematics.sliced("llama.*", "load.*"))
+  .union(llmLoadSchematics.sliced("llama.*", "load.*", "offloadKVCacheToGpu"))
   .union(llamaLoadConfigSchematics);
 
 export const llmMlxLoadConfigSchematics = llmSharedLoadConfigSchematics.union(

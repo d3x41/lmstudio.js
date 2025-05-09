@@ -10,6 +10,7 @@ export {
 export { apiServerPorts } from "./apiServerPorts.js";
 export { BufferedEvent } from "./BufferedEvent.js";
 export { CancelEvent } from "./CancelEvent.js";
+export { kebabToCamelCase } from "./casingConvert.js";
 export { Cleaner } from "./Cleaner.js";
 export { deepFreeze } from "./deepFreeze.js";
 export { DeepReplaceType, DeepReplaceType2 } from "./DeepReplaceType.js";
@@ -40,7 +41,14 @@ export { runOnDispose } from "./runOnDispose.js";
 export { safeCallCallback } from "./safeCallCallback.js";
 export { Signal, SignalLike, WritableSignal } from "./Signal.js";
 export { LoggerInterface, SimpleLogger, SimpleLoggerConstructorOpts } from "./SimpleLogger.js";
-export { makeSlicedSignalFrom, SlicedSignalBuilder } from "./SlicedSignal.js";
+export {
+  chainMaybeShortCircuitedSignalFrom,
+  isShortCircuited,
+  makeSlicedSignalFrom,
+  shortCircuited,
+  ShortCircuited,
+  SlicedSignalBuilder,
+} from "./SlicedSignal.js";
 export { StreamablePromise } from "./StreamablePromise.js";
 export { Subscribable } from "./Subscribable.js";
 export { text } from "./text.js";

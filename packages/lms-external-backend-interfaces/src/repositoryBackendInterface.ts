@@ -3,6 +3,7 @@ import { type InferClientPort } from "@lmstudio/lms-communication-client";
 import {
   artifactDownloadPlanSchema,
   downloadProgressUpdateSchema,
+  jsonSerializableSchema,
   kebabCaseSchema,
   kebabCaseWithDotsSchema,
   localArtifactFileListSchema,
@@ -104,6 +105,8 @@ export function createRepositoryBackendInterface() {
       .addChannelEndpoint("pushArtifact", {
         creationParameter: z.object({
           path: z.string(),
+          description: z.string().max(1000).optional(),
+          overrides: jsonSerializableSchema.optional(),
         }),
         toServerPacket: z.void(),
         toClientPacket: z.discriminatedUnion("type", [
@@ -125,6 +128,16 @@ export function createRepositoryBackendInterface() {
             type: z.literal("authenticated"),
           }),
         ]),
+      })
+      .addRpcEndpoint("loginWithPreAuthenticatedKeys", {
+        parameter: z.object({
+          keyId: z.string(),
+          publicKey: z.string(),
+          privateKey: z.string(),
+        }),
+        returns: z.object({
+          userName: z.string(),
+        }),
       })
       /**
        * Given the owner and name of an artifact, creates a download plan for the artifact. Throws
