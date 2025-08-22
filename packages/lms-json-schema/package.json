@@ -14,7 +14,7 @@
     "@lmstudio/lms-external-backend-interfaces": "^0.5.0",
     "@lmstudio/lms-shared-types": "^0.6.14",
     "zod": "^3.22.4",
-    "zod-to-json-schema": "3.22.4"
+    "zod-to-json-schema": "3.24.1"
   },
   "devDependencies": {
     "@types/node": "20.12.7"
